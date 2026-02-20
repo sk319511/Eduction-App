@@ -20,7 +20,7 @@ function App() {
     
     const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.querySelectorAll('.stat-number').forEach(number=>{if(!number.classList.contains('animated')){number.classList.add('animated');animateCounter(number);}});}});},{threshold:0.5});const statsSection=document.querySelector('.stats-section');if(statsSection)observer.observe(statsSection);
     
-    const nextBtn=document.getElementById('nextBtn');const prevBtn=document.getElementById('prevBtn');const menuToggle=document.getElementById('menuToggle');const navMenu=document.getElementById('navMenu');const header=document.getElementById('header');const contactForm=document.getElementById('contactForm');if(nextBtn)nextBtn.onclick=nextSlide;if(prevBtn)prevBtn.onclick=prevSlide;const autoRotate=setInterval(nextSlide,5000);const handleKeydown=(e)=>{if(e.key==='ArrowLeft')prevSlide();if(e.key==='ArrowRight')nextSlide();};document.addEventListener('keydown',handleKeydown);const handleResize=()=>updateCarousel();window.addEventListener('resize',handleResize);if(menuToggle&&navMenu){menuToggle.onclick=()=>{navMenu.classList.toggle('active');menuToggle.classList.toggle('active');};}const handleScroll=()=>{if(header){header.classList.toggle('scrolled',window.scrollY>100);}const sections=document.querySelectorAll('section[id]');const navLinks=document.querySelectorAll('.nav-link');const scrollPosition=window.scrollY+100;sections.forEach(section=>{const sectionTop=section.offsetTop;const sectionHeight=section.offsetHeight;const sectionId=section.getAttribute('id');if(scrollPosition>=sectionTop&&scrollPosition<sectionTop+sectionHeight){navLinks.forEach(link=>{link.classList.remove('active');const href=link.getAttribute('href').substring(1);if(href===sectionId){link.classList.add('active');}});}});};window.addEventListener('scroll',handleScroll);const navLinks=document.querySelectorAll('.nav-link');navLinks.forEach(link=>{link.onclick=(e)=>{e.preventDefault();const targetId=link.getAttribute('href').substring(1);const targetSection=document.getElementById(targetId);if(targetSection){const headerHeight=header.offsetHeight;const targetPosition=targetSection.offsetTop-headerHeight;window.scrollTo({top:targetPosition,behavior:'smooth'});navMenu.classList.remove('active');menuToggle.classList.remove('active');}};});const categoryTabs=document.querySelectorAll('.category-tab');categoryTabs.forEach(tab=>{tab.onclick=()=>{categoryTabs.forEach(t=>t.classList.remove('active'));tab.classList.add('active');};});if(contactForm){contactForm.onsubmit=(e)=>{e.preventDefault();const formData=new FormData(contactForm);const data=Object.fromEntries(formData);alert(`Thank you ${data.name}! Your message has been transmitted successfully.`);contactForm.reset();};}return()=>{clearInterval(autoRotate);document.removeEventListener('keydown',handleKeydown);window.removeEventListener('resize',handleResize);window.removeEventListener('scroll',handleScroll);if(statsSection)observer.unobserve(statsSection);};},[]);
+    const nextBtn=document.getElementById('nextBtn');const prevBtn=document.getElementById('prevBtn');const menuToggle=document.getElementById('menuToggle');const navMenu=document.getElementById('navMenu');const header=document.getElementById('header');const contactForm=document.getElementById('contactForm');if(nextBtn)nextBtn.onclick=nextSlide;if(prevBtn)prevBtn.onclick=prevSlide;const autoRotate=setInterval(nextSlide,5000);const handleKeydown=(e)=>{if(e.key==='ArrowLeft')prevSlide();if(e.key==='ArrowRight')nextSlide();};document.addEventListener('keydown',handleKeydown);const handleResize=()=>updateCarousel();window.addEventListener('resize',handleResize);if(menuToggle&&navMenu){menuToggle.onclick=()=>{navMenu.classList.toggle('active');menuToggle.classList.toggle('active');};}let lastScroll=0;const handleScroll=()=>{const currentScroll=window.scrollY;if(header){header.classList.toggle('scrolled',currentScroll>100);if(currentScroll>lastScroll&&currentScroll>100){header.style.transform='translateY(-100%)'}else{header.style.transform='translateY(0)'}}lastScroll=currentScroll;const sections=document.querySelectorAll('section[id]');const navLinks=document.querySelectorAll('.nav-link');const scrollPosition=currentScroll+100;sections.forEach(section=>{const sectionTop=section.offsetTop;const sectionHeight=section.offsetHeight;const sectionId=section.getAttribute('id');if(scrollPosition>=sectionTop&&scrollPosition<sectionTop+sectionHeight){navLinks.forEach(link=>{link.classList.remove('active');const href=link.getAttribute('href').substring(1);if(href===sectionId){link.classList.add('active');}});}});};window.addEventListener('scroll',handleScroll);const navLinks=document.querySelectorAll('.nav-link');navLinks.forEach(link=>{link.onclick=(e)=>{e.preventDefault();const targetId=link.getAttribute('href').substring(1);const targetSection=document.getElementById(targetId);if(targetSection){const headerHeight=header.offsetHeight;const targetPosition=targetSection.offsetTop-headerHeight;window.scrollTo({top:targetPosition,behavior:'smooth'});navMenu.classList.remove('active');menuToggle.classList.remove('active');}};});const categoryTabs=document.querySelectorAll('.category-tab');categoryTabs.forEach(tab=>{tab.onclick=()=>{categoryTabs.forEach(t=>t.classList.remove('active'));tab.classList.add('active');};});if(contactForm){contactForm.onsubmit=(e)=>{e.preventDefault();const formData=new FormData(contactForm);const data=Object.fromEntries(formData);alert(`Thank you ${data.name}! Your message has been transmitted successfully.`);contactForm.reset();};}return()=>{clearInterval(autoRotate);document.removeEventListener('keydown',handleKeydown);window.removeEventListener('resize',handleResize);window.removeEventListener('scroll',handleScroll);if(statsSection)observer.unobserve(statsSection);};},[]);
   
   return (
 
@@ -69,9 +69,7 @@ function App() {
                 <li><a href="#skills" class="nav-link">Arsenal</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
                 <li><a href="#Login" class="nav-link">Login</a></li>
-                
             </ul>
-            
             
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
@@ -79,12 +77,34 @@ function App() {
                 <span></span>
             </div>
         </nav>
+        
+        <section class="skills-section1" id="skills">
+            <div class="skills-container">
+                <div class="skill-categories">
+                    <div class="category-tab active" data-category="all">All</div>
+                    <div class="category-tab" data-category="Demo">Demo</div>
+                    <div class="category-tab" data-category="backend">Backend</div>
+                    <div class="category-tab" data-category="cloud">Cloud & DevOps</div>
+                    <div class="category-tab" data-category="emerging">Emerging Tech</div>
+                    <div class="category-tab" data-category="all">All Skills</div>
+                    <div class="category-tab" data-category="Demo">Demo</div>
+                    <div class="category-tab" data-category="backend">Backend</div>
+                    <div class="category-tab" data-category="cloud">Cloud & DevOps</div>
+                    <div class="category-tab" data-category="emerging">Emerging Tech</div>
+                    <div class="category-tab" data-category="all">All Skills</div>
+                    <div class="category-tab" data-category="Demo">Demo</div>
+                    <div class="category-tab" data-category="backend">Backend</div>
+                    <div class="category-tab" data-category="cloud">Cloud & DevOps</div>
+                    <div class="category-tab" data-category="emerging">Emerging Tech</div>
+                </div>
+            </div>
+        </section>
     </header>
- <section class="skills-section1" id="skills">
+ {/* <section class="skills-section1" id="skills">
         <div class="skills-container">
             <div class="section-header">
                 <h2 class="section-title">All Courses</h2>
-                {/* <p class="section-subtitle">Mastery of cutting-edge technologies and frameworks</p> */}
+                <p class="section-subtitle">Mastery of cutting-edge technologies and frameworks</p> 
             </div>
             
             <div class="skill-categories">
@@ -109,7 +129,7 @@ function App() {
               
             </div>
         </div>
-    </section>
+    </section> */}
    
     <section class="hero" id="home">
         <div class="carousel-container">
@@ -155,36 +175,16 @@ function App() {
                 <div class="pillar">
                     <div class="pillar-icon">🔬</div>
                     <h3 class="pillar-title">Precision</h3>
-                    <p className="pillar-description">
-                        <p>
-  Meticulous attention to detail ensures every pixel, every line of code, and every interaction is perfectly crafted by{" "}
-  <a
-    href="#"
-    rel="nofollow"
-    target="_blank"
-    style={{
-      color: "var(--accent-cyan)",
-      textDecoration: "none"
-    }}
-  >
+                    <p className="pillar-description">           
+   <p>Meticulous attention to detail ensures every pixel, every line of code, and every interaction is perfectly crafted by{" "}
+  < a href="#"rel="nofollow"target="_blank"style= {{color: "var(--accent-cyan)", textDecoration: "none"}}>
     Comming Soon
-  </a>
-  , enhanced with stunning visuals from{" "}
-  <a
-    href="#"
-    rel="nofollow"
-    target="_blank"
-    style={{
-      color: "var(--accent-cyan)",
-      textDecoration: "none"
-    }}
-  >
+  </a>, enhanced with stunning visuals from{" "}
+  <a href="#" rel="nofollow" target="_blank"style={{color: "var(--accent-cyan)",textDecoration: "none" }}>
     Comm
   </a>
-  
 </p>
-
-                    </p>
+</p>
                 </div>
                 
                 <div class="pillar">
@@ -270,11 +270,11 @@ function App() {
         
         <div class="contact-container">
             <div class="contact-info">
-                <a href="#" target="_blank" class="info-item">
+                <a href="sk3195113@gmail.com" target="_blank" class="info-item">
                     <div class="info-icon">📍</div>
                     <div class="info-text">
                         <h4>Location</h4>
-                        <p>Silicon Valley, CA 94025</p>
+                        <p>India </p>
                     </div>
                 </a>
                 
@@ -282,15 +282,15 @@ function App() {
                     <div class="info-icon">📧</div>
                     <div class="info-text">
                         <h4>Email</h4>
-                        <p></p>
+                        <p>sk3195113@gmail.com</p>
                     </div>
                 </a>
                 
-                <a href="tel:+15551234567" class="info-item">
+                <a href="tel:+917643838920" class="info-item">
                     <div class="info-icon">📱</div>
                     <div class="info-text">
                         <h4>Phone</h4>
-                        <p>+1 (555) 123-4567</p>
+                        <p>+91 7643838920</p>
                     </div>
                 </a>
                 
