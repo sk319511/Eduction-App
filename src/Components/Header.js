@@ -21,7 +21,7 @@ function Header() {
           <li><Link to="/" className="nav-router-link active">Home</Link></li>
           <li><a href="#about" className="nav-link">About</a></li>
           <li><a href="#stats" className="nav-link">Metrics</a></li>
-          <li><a href="#skills" className="nav-link">Arsenal</a></li>
+          {/* <li><a href="#skills" className="nav-link">Arsenal</a></li> */}
           <li><a href="#contact" className="nav-link">Contact</a></li>
           <li><Link to="/login" className="nav-router-link">Login</Link></li>
         </ul>

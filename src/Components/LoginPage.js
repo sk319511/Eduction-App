@@ -4,42 +4,65 @@ import Header from "./Header";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    alert("Email: " + email + "\nPassword: " + password);
+
+    // Dummy Login Check
+    if (email === "admin@gmail.com" && password === "1234") {
+      setIsLoggedIn(true);
+    } else {
+      alert("Invalid Credentials");
+    }
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setEmail("");
+    setPassword("");
   };
 
   return (
     <div>
       <Header />
-      <div style={styles.container}>
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <h2>Login</h2>
 
-          <input
-            type="email"
-            placeholder="Enter Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={styles.input}
-            required
-          />
+      {!isLoggedIn ? (
+        <div style={styles.container}>
+          <form onSubmit={handleLogin} style={styles.form}>
+            <h2>Login</h2>
 
-          <input
-            type="password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
-            required
-          />
+            <input
+              type="email"
+              placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={styles.input}
+              required
+            />
 
-          <button type="submit" style={styles.button}>
-            Login
+            <input
+              type="password"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={styles.input}
+              required
+            />
+
+            <button type="submit" style={styles.button}>
+              Login
+            </button>
+          </form>
+        </div>
+      ) : (
+        <div style={styles.dashboard}>
+          <h2>Welcome, {email}</h2>
+          <button onClick={handleLogout} style={styles.logoutBtn}>
+            Logout
           </button>
-        </form>
-      </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -72,6 +95,18 @@ const styles = {
     padding: "10px",
     marginTop: "10px",
     backgroundColor: "#007bff",
+    color: "#fff",
+    border: "none",
+    cursor: "pointer",
+    borderRadius: "5px",
+  },
+  dashboard: {
+    textAlign: "center",
+    marginTop: "100px",
+  },
+  logoutBtn: {
+    padding: "10px 20px",
+    backgroundColor: "red",
     color: "#fff",
     border: "none",
     cursor: "pointer",
