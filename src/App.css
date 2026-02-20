@@ -333,6 +333,44 @@ body::after {
 	color: var(--accent-cyan);
 }
 
+/* Router Link Styling */
+.nav-menu .nav-router-link {
+	color: var(--text-secondary);
+	text-decoration: none;
+	padding: 12px 25px;
+	transition: all 0.3s ease;
+	position: relative;
+	text-transform: uppercase;
+	font-weight: 500;
+	letter-spacing: 1px;
+	font-size: 14px;
+}
+
+.nav-menu .nav-router-link::before {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 0;
+	height: 2px;
+	background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+	transition: width 0.3s ease;
+}
+
+.nav-menu .nav-router-link:hover {
+	color: var(--text-primary);
+}
+
+.nav-menu .nav-router-link:hover::before,
+.nav-menu .nav-router-link.active::before {
+	width: 80%;
+}
+
+.nav-menu .nav-router-link.active {
+	color: var(--accent-cyan);
+}
+
 .menu-toggle {
 	display: none;
 	flex-direction: column;
