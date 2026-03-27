@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Login() {
+function Login({ onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,63 +10,77 @@ function Login() {
   };
 
   return (
-    <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <h2>Login</h2>
+    <div style={styles.form}>
+      <h2 style={styles.title}>Login</h2>
 
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
-          required
-        />
+      <input
+        type="email"
+        placeholder="Enter Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        style={styles.input}
+        required
+      />
 
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
-          required
-        />
+      <input
+        type="password"
+        placeholder="Enter Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        style={styles.input}
+        required
+      />
 
-        <button type="submit" style={styles.button}>
-          Login
-        </button>
-      </form>
+      <button type="submit" onClick={handleSubmit} style={styles.button}>
+        Login
+      </button>
     </div>
   );
 }
 
 const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    backgroundColor: "#f2f2f2",
-  },
   form: {
-    background: "#fff",
+    background: "#1a1a1a",
     padding: "30px",
-    borderRadius: "10px",
-    boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-    width: "300px",
+    borderRadius: "15px",
+    boxShadow: "0 0 30px rgba(153,69,255,0.3)",
+    width: "100%",
+    maxWidth: "380px",
+    margin: "0 auto",
+    border: "1px solid #3a3a3a",
+  },
+  title: {
+    color: "#ffffff",
+    marginBottom: "20px",
+    textAlign: "center",
+    fontSize: "24px",
+    textTransform: "uppercase",
+    letterSpacing: "2px",
   },
   input: {
     width: "100%",
-    padding: "10px",
-    margin: "10px 0",
+    padding: "12px 15px",
+    margin: "8px 0",
+    background: "#121212",
+    border: "1px solid #3a3a3a",
+    borderRadius: "8px",
+    color: "#ffffff",
+    fontSize: "14px",
+    boxSizing: "border-box",
   },
   button: {
     width: "100%",
-    padding: "10px",
-    backgroundColor: "#007bff",
+    padding: "12px",
+    marginTop: "15px",
+    background: "linear-gradient(135deg, #9945ff, #00a8ff)",
     color: "#fff",
     border: "none",
+    borderRadius: "8px",
     cursor: "pointer",
+    fontSize: "16px",
+    fontWeight: "700",
+    textTransform: "uppercase",
+    letterSpacing: "2px",
   },
 };
 

@@ -1,10 +1,12 @@
 import './App.css';
 
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Components/Header';
+import Login from './Components/Login';
 
 function App() {
+  const [showLogin, setShowLogin] = useState(false);
   useEffect(() => {
     let currentIndex = 0;
     const portfolioData = [{id:1,title:'Neural Network',description:'Advanced AI system with deep learning capabilities for predictive analytics and pattern recognition.',image:'images/neural-network.jpg',tech:['TensorFlow','Python','CUDA']},{id:2,title:'Quantum Cloud',description:'Next-generation cloud infrastructure leveraging quantum computing for unprecedented processing power.',image:'images/quantum-cloud.jpg',tech:['AWS','Kubernetes','Docker']},{id:3,title:'Blockchain Vault',description:'Secure decentralized storage solution using advanced encryption and distributed ledger technology.',image:'images/blockchain-vault.jpg',tech:['Ethereum','Solidity','Web3']},{id:4,title:'Cyber Defense',description:'Military-grade cybersecurity framework with real-time threat detection and automated response.',image:'images/cyber-defense.jpg',tech:['Zero Trust','AI Defense','Encryption']},{id:5,title:'Data Nexus',description:'Big data processing platform capable of analyzing petabytes of information in real-time.',image:'images/data-nexus.jpg',tech:['Apache Spark','Hadoop','Kafka']},{id:6,title:'AR Interface',description:'Augmented reality system for immersive data visualization and interactive experiences.',image:'images/ar-interface.jpg',tech:['Unity','ARCore','Computer Vision']},{id:7,title:'IoT Matrix',description:'Intelligent IoT ecosystem connecting millions of devices with edge computing capabilities.',image:'images/iot-matrix.jpg',tech:['MQTT','Edge AI','5G']}];
@@ -26,7 +28,15 @@ function App() {
   
   return (
     <div className="App">
-      <Header />
+      {showLogin && (
+        <div style={{position:'fixed',top:0,left:0,width:'100%',height:'100%',zIndex:10000,background:'rgba(0,0,0,0.85)',display:'flex',alignItems:'center',justifyContent:'center',padding:'20px',boxSizing:'border-box'}} onClick={() => setShowLogin(false)}>
+          <div onClick={(e) => e.stopPropagation()} style={{position:'relative',width:'100%',maxWidth:'400px'}}>
+            <button onClick={() => setShowLogin(false)} style={{position:'absolute',top:'-40px',right:'0',background:'transparent',border:'none',color:'#fff',fontSize:'30px',cursor:'pointer'}}>&#x2715;</button>
+            <Login />
+          </div>
+        </div>
+      )}
+      <Header onLoginClick={() => setShowLogin(true)} />
       
       {/* Loader */}
       {/* <div className="loader" id="loader">

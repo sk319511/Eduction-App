@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-function Header() {
+function Header({ onLoginClick }) {
   return (
     <header className="header" id="header">
       <nav className="nav-container">
-        <Link to="/" className="logo">
+        <a href="#home" className="logo">
           <div className="logo-icon">
             <div className="logo-prism">
               <div className="prism-shape"></div>
@@ -15,15 +14,15 @@ function Header() {
             <span className="prism">Education </span>
             <span className="flux">App</span>
           </span>
-        </Link>
+        </a>
 
         <ul className="nav-menu" id="navMenu">
-          <li><Link to="/" className="nav-router-link active">Home</Link></li>
+          <li><a href="#home" className="nav-link active">Home</a></li>
           <li><a href="#about" className="nav-link">About</a></li>
           <li><a href="#stats" className="nav-link">Metrics</a></li>
           {/* <li><a href="#skills" className="nav-link">Arsenal</a></li> */}
           <li><a href="#contact" className="nav-link">Contact</a></li>
-          <li><Link to="/login" className="nav-router-link">Login</Link></li>
+          <li><a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onLoginClick(); }}>Login</a></li>
         </ul>
 
         <div className="menu-toggle" id="menuToggle">
@@ -32,6 +31,23 @@ function Header() {
           <span></span>
         </div>
       </nav>
+
+      <section className="skills-section1" id="skills">
+        <div className="skills-container">
+          <div className="skill-categories">
+            <div className="category-tab active" data-category="all">All</div>
+            <div className="category-tab" data-category="Demo">Demo</div>
+            <div className="category-tab" data-category="backend">Backend</div>
+            <div className="category-tab" data-category="cloud">Cloud & DevOps</div>
+            <div className="category-tab" data-category="emerging">Emerging Tech</div>
+            <div className="category-tab" data-category="all">All Skills</div>
+            <div className="category-tab" data-category="Demo">Demo</div>
+            <div className="category-tab" data-category="backend">Backend</div>
+            <div className="category-tab" data-category="cloud">Cloud & DevOps</div>
+            <div className="category-tab" data-category="emerging">Emerging Tech</div>
+          </div>
+        </div>
+      </section>
     </header>
   );
 }
