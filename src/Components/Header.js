@@ -22,7 +22,7 @@ function Header({ onLoginClick }) {
           <li><a href="#stats" className="nav-link">Metrics</a></li>
           {/* <li><a href="#skills" className="nav-link">Arsenal</a></li> */}
           <li><a href="#contact" className="nav-link">Contact</a></li>
-          <li><a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); onLoginClick(); }}>Login</a></li>
+          <li><button className="nav-link login-btn" onClick={() => onLoginClick()}>Login</button></li>
         </ul>
 
         <div className="menu-toggle" id="menuToggle">

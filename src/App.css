@@ -333,6 +333,13 @@ body::after {
 	color: var(--accent-cyan);
 }
 
+.login-btn {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	font-family: inherit;
+}
+
 /* Router Link Styling */
 .nav-menu .nav-router-link {
 	color: var(--text-secondary);
