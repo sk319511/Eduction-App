@@ -24,7 +24,7 @@ function App() {
     
     const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.querySelectorAll('.stat-number').forEach(number=>{if(!number.classList.contains('animated')){number.classList.add('animated');animateCounter(number);}});}});},{threshold:0.5});const statsSection=document.querySelector('.stats-section');if(statsSection)observer.observe(statsSection);
     
-    const nextBtn=document.getElementById('nextBtn');const prevBtn=document.getElementById('prevBtn');const menuToggle=document.getElementById('menuToggle');const navMenu=document.getElementById('navMenu');const header=document.getElementById('header');const contactForm=document.getElementById('contactForm');if(nextBtn)nextBtn.onclick=nextSlide;if(prevBtn)prevBtn.onclick=prevSlide;const autoRotate=setInterval(nextSlide,5000);const handleKeydown=(e)=>{if(e.key==='ArrowLeft')prevSlide();if(e.key==='ArrowRight')nextSlide();};document.addEventListener('keydown',handleKeydown);const handleResize=()=>updateCarousel();window.addEventListener('resize',handleResize);if(menuToggle&&navMenu){menuToggle.onclick=()=>{navMenu.classList.toggle('active');menuToggle.classList.toggle('active');};}const handleScroll=()=>{const currentScroll=window.scrollY;if(header){header.classList.toggle('scrolled',currentScroll>100);}const sections=document.querySelectorAll('section[id]');const navLinks=document.querySelectorAll('.nav-link');const scrollPosition=currentScroll+100;sections.forEach(section=>{const sectionTop=section.offsetTop;const sectionHeight=section.offsetHeight;const sectionId=section.getAttribute('id');if(scrollPosition>=sectionTop&&scrollPosition<sectionTop+sectionHeight){navLinks.forEach(link=>{link.classList.remove('active');const href=link.getAttribute('href').substring(1);if(href===sectionId){link.classList.add('active');}});}});};window.addEventListener('scroll',handleScroll);const navLinks=document.querySelectorAll('.nav-link');navLinks.forEach(link=>{link.onclick=(e)=>{e.preventDefault();const targetId=link.getAttribute('href').substring(1);const targetSection=document.getElementById(targetId);if(targetSection){const headerHeight=header.offsetHeight;const targetPosition=targetSection.offsetTop-headerHeight;window.scrollTo({top:targetPosition,behavior:'smooth'});navMenu.classList.remove('active');menuToggle.classList.remove('active');}};});const categoryTabs=document.querySelectorAll('.category-tab');categoryTabs.forEach(tab=>{tab.onclick=()=>{categoryTabs.forEach(t=>t.classList.remove('active'));tab.classList.add('active');};});if(contactForm){contactForm.onsubmit=(e)=>{e.preventDefault();const formData=new FormData(contactForm);const data=Object.fromEntries(formData);alert(`Thank you ${data.name}! Your message has been transmitted successfully.`);contactForm.reset();};}return()=>{clearInterval(autoRotate);document.removeEventListener('keydown',handleKeydown);window.removeEventListener('resize',handleResize);window.removeEventListener('scroll',handleScroll);if(statsSection)observer.unobserve(statsSection);};},[]);
+    const nextBtn=document.getElementById('nextBtn');const prevBtn=document.getElementById('prevBtn');const menuToggle=document.getElementById('menuToggle');const navMenu=document.getElementById('navMenu');const header=document.getElementById('header');const contactForm=document.getElementById('contactForm');if(nextBtn)nextBtn.onclick=nextSlide;if(prevBtn)prevBtn.onclick=prevSlide;const autoRotate=setInterval(nextSlide,5000);const handleKeydown=(e)=>{if(e.key==='ArrowLeft')prevSlide();if(e.key==='ArrowRight')nextSlide();};document.addEventListener('keydown',handleKeydown);const handleResize=()=>updateCarousel();window.addEventListener('resize',handleResize);if(menuToggle&&navMenu){menuToggle.onclick=()=>{navMenu.classList.toggle('active');menuToggle.classList.toggle('active');};}let lastScroll=0;const handleScroll=()=>{const currentScroll=window.scrollY;if(header){header.classList.toggle('scrolled',currentScroll>100);}lastScroll=currentScroll;const sections=document.querySelectorAll('section[id]');const navLinks=document.querySelectorAll('.nav-link');const scrollPosition=currentScroll+100;sections.forEach(section=>{const sectionTop=section.offsetTop;const sectionHeight=section.offsetHeight;const sectionId=section.getAttribute('id');if(scrollPosition>=sectionTop&&scrollPosition<sectionTop+sectionHeight){navLinks.forEach(link=>{link.classList.remove('active');const href=link.getAttribute('href');if(href&&href.substring(1)===sectionId){link.classList.add('active');}});}});};window.addEventListener('scroll',handleScroll);const navLinks=document.querySelectorAll('.nav-link');navLinks.forEach(link=>{link.onclick=(e)=>{e.preventDefault();const href=link.getAttribute('href');if(!href)return;const targetId=href.substring(1);const targetSection=document.getElementById(targetId);if(targetSection){const headerHeight=header.offsetHeight;const targetPosition=targetSection.offsetTop-headerHeight;window.scrollTo({top:targetPosition,behavior:'smooth'});navMenu.classList.remove('active');menuToggle.classList.remove('active');}};});const categoryTabs=document.querySelectorAll('.category-tab');categoryTabs.forEach(tab=>{tab.onclick=()=>{categoryTabs.forEach(t=>t.classList.remove('active'));tab.classList.add('active');};});if(contactForm){contactForm.onsubmit=(e)=>{e.preventDefault();const formData=new FormData(contactForm);const data=Object.fromEntries(formData);alert(`Thank you ${data.name}! Your message has been transmitted successfully.`);contactForm.reset();};}return()=>{clearInterval(autoRotate);document.removeEventListener('keydown',handleKeydown);window.removeEventListener('resize',handleResize);window.removeEventListener('scroll',handleScroll);if(statsSection)observer.unobserve(statsSection);};},[]);
   
   return (
     <div className="App">
@@ -127,7 +127,7 @@ function App() {
                     <div class="pillar-icon">💎</div>
                     <h3 class="pillar-title">Innovation</h3>
                     <p className="pillar-description">
-                        Breaking boundaries with revolutionary approaches that redefine industry standards and push the limits of what's possible.
+                        Breaking boundaries with revolutionary approaches that redefine industry standards and push the limits of what's possible. Elevate your designs with premium vector stickers from <a href="#" rel="nofollow" target="_blank">Comming Soon</a>.
                     </p>
                 </div>
                 
@@ -135,7 +135,14 @@ function App() {
                     <div class="pillar-icon">🔬</div>
                     <h3 class="pillar-title">Precision</h3>
                     <p className="pillar-description">
-                        Meticulous attention to detail ensures every pixel, every line of code, and every interaction is perfectly crafted.
+                        Meticulous attention to detail ensures every pixel, every line of code, and every interaction is perfectly crafted by{" "}
+                        <a href="#" rel="nofollow" target="_blank" style={{color: "var(--accent-cyan)", textDecoration: "none"}}>
+                            Comming Soon
+                        </a>
+                        , enhanced with stunning visuals from{" "}
+                        <a href="#" rel="nofollow" target="_blank" style={{color: "var(--accent-cyan)", textDecoration: "none"}}>
+                            Comm
+                        </a>
                     </p>
                 </div>
                 
@@ -143,7 +150,7 @@ function App() {
                     <div class="pillar-icon">∞</div>
                     <h3 class="pillar-title">Evolution</h3>
                     <p class="pillar-description">
-                        Continuous adaptation and growth, staying ahead of trends while building timeless solutions for tomorrow.
+                        Continuous adaptation and growth, staying ahead of trends while building timeless solutions for tomorrow. Boost your productivity with the easy-to-use timer tools at <a href="#" rel="nofollow" target="_blank">Comming Soon</a>.
                     </p>
                 </div>
             </div>
@@ -222,7 +229,7 @@ function App() {
         
         <div class="contact-container">
             <div class="contact-info">
-                <a href="mailto:sk3195113@gmail.com" target="_blank" rel="noreferrer" className="info-item">
+                <a href="sk3195113@gmail.com" target="_blank" class="info-item">
                     <div class="info-icon">📍</div>
                     <div class="info-text">
                         <h4>Location</h4>
@@ -230,7 +237,8 @@ function App() {
                     </div>
                 </a>
                 
-                <a href="mailto:sk3195113@gmail.com" className="info-item">
+                <a href="#" class="info-item">
+                    <div class="info-icon">📧</div>
                     <div class="info-text">
                         <h4>Email</h4>
                         <p>sk3195113@gmail.com</p>
@@ -245,7 +253,8 @@ function App() {
                     </div>
                 </a>
                 
-                <a href="/schedule" target="_blank" rel="noreferrer" className="info-item">
+                <a href="#" target="_blank" class="info-item">
+                    <div class="info-icon">📅</div>
                     <div class="info-text">
                         <h4>Schedule Meeting</h4>
                         <p>Book a consultation</p>
@@ -298,40 +307,41 @@ function App() {
                     Refracting complex challenges into brilliant solutions through the convergence of art, science, and technology.
                 </p>
                 <div class="footer-social">
-                    <a href="/" className="social-icon">fa</a>
-                    <a href="/" className="social-icon">t</a>
-                    <a href="/" className="social-icon">in</a>
-                    <a href="/" className="social-icon">ig</a>
+                    <a href="#" class="social-icon">fa</a>
+                    <a href="#" class="social-icon">t</a>
+                    <a href="#" class="social-icon">in</a>
+                    <a href="#" class="social-icon">ig</a>
                 </div>
             </div>
             
             <div class="footer-section">
                 <h4>Services</h4>
                 <div class="footer-links">
-                    <a href="/web-development" className="footer-link">Web Development</a>
-                    <a href="/app-development" className="footer-link">App Development</a>
-                    <a href="/cloud-solutions" className="footer-link">Cloud Solutions</a>
-                    <a href="/ai-integration" className="footer-link">AI Integration</a>
+                    <a href="#">Web Development</a>
+                    <a href="#">App Development</a>
+                    <a href="#">Cloud Solutions</a>
+                    <a href="#">AI Integration</a>
                 </div>
             </div>
             
             <div class="footer-section">
                 <h4>Company</h4>
                 <div class="footer-links">
-                    <a href="/about" className="footer-link">About Us</a>
-                    <a href="/team" className="footer-link">Our Team</a>
-                    <a href="/careers" className="footer-link">Careers</a>
-                    <a href="/press" className="footer-link">Press Kit</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Our Team</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Press Kit</a>
                 </div>
             </div>
             
             <div class="footer-section">
                 <h4>Resources</h4>
                 <div class="footer-links">
-                    <a href="/docs">Documentation</a>
-                    <a href="/api">API Reference</a>
-                    <a href="/blog">Blog</a>
-                    <a href="/support">Support</a>
+                    <a href=" ">Documentation</a>
+                    <a href=" ">API Reference</a>
+                    <a href="#blog">Blog</a>
+
+                    <a href=" ">Support</a>
                 </div>
             </div>
         </div>
